@@ -8,7 +8,7 @@
     <version>1.0.5</version>
     <packaging>jar</packaging>
 
-    <name>dyplom-backend</name>
+    <name>notelt-backend</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
