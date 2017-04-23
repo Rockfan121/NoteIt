@@ -7,15 +7,6 @@ import java.util.List;
 
 @Entity(name = "user")
 public class User {
-    public User() {
-        notes = Lists.emptyList();
-    }
-
-    public User(String name) {
-        this.name = name;
-        notes = Lists.emptyList();
-    }
-
     @Column
     @Id
     @GeneratedValue
@@ -27,6 +18,15 @@ public class User {
     @OneToMany
     @JoinTable(name = "note", joinColumns = {@JoinColumn(name = "id")})
     private List<Note> notes;
+
+    public User() {
+        notes = Lists.emptyList();
+    }
+
+    public User(String name) {
+        this.name = name;
+        notes = Lists.emptyList();
+    }
 
     public int getId() {
         return id;
