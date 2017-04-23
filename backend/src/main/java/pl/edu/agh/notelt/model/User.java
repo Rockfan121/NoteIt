@@ -15,8 +15,8 @@ public class User {
     @Column
     private String name;
 
-    @OneToMany
-    @JoinTable(name = "note", joinColumns = {@JoinColumn(name = "id")})
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_note", joinColumns = {@JoinColumn(name = "user_id")})
     private List<Note> notes;
 
     public User() {
