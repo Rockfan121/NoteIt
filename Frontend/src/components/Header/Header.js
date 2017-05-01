@@ -1,18 +1,33 @@
 import React from 'react'
-import { IndexLink, Link } from 'react-router'
-import './Header.scss'
+import { Link } from 'react-router' //co to jest IndexLink?
+import cls from './Header.scss'
 
-export const Header = () => (
-  <div>
-    <h1>React Redux Starter Kit</h1>
-    <IndexLink to='/' activeClassName='route--active'>
-      Home
-    </IndexLink>
-    {' · '}
-    <Link to='/counter' activeClassName='route--active'>
-      Counter
-    </Link>
-  </div>
-)
-
+const Header = React.createClass({
+  propTypes: {
+    text: React.PropTypes.string.isRequired,
+    buttons: React.PropTypes.array,
+  },
+  render() {
+    const buttons = this.props.buttons != null
+    ? this.props.buttons.map((btnName, i) =>{
+      return (
+        <li key={i}
+          className={cls.button}>
+          {btnName}
+        </li>
+      )
+    })
+    : <li />
+    return (
+      <div className={cls.barContainer}>
+        <div className={cls.barContent}>
+          <h1 className={cls.text}>{text}</h1>
+          <ul className={cls.barRightSide}>
+            {buttons}
+          </ul>
+        </div>
+      </div>
+    )
+  },
+})
 export default Header

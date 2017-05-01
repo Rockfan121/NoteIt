@@ -1,19 +1,34 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
-import CounterRoute from './Counter'
+//import CounterRoute from './Counter'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-export const createRoutes = (store) => ({
+/*export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
   indexRoute  : Home,
   childRoutes : [
-    CounterRoute(store)
+    //CounterRoute(store)
   ]
+})*/
+
+const createRoutes = (store) => ({
+  path: '/',
+  indexRoute: Home,
+  component: CoreLayout,
+  getChildRoutes (location, cb) {
+    require.ensure([], (require) => {
+      cb(null, [
+        require('./Home').default(store),
+        require('./Counter').default(store),
+      ])
+    })
+  },
 })
+
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
