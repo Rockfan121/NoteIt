@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint key-spacing:0 spaced-comment:0 */
 const path = require('path')
 const debug = require('debug')('app:config:project')
@@ -33,7 +34,7 @@ const config = {
   compiler_babel : {
     cacheDirectory : true,
     plugins        : ['transform-runtime'],
-    presets        : ['es2015', 'react', 'stage-0']
+    presets        : ['es2015', 'react', 'stage-0'],
   },
   compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
@@ -43,13 +44,13 @@ const config = {
   compiler_stats           : {
     chunks : false,
     chunkModules : false,
-    colors : true
+    colors : true,
   },
   compiler_vendors : [
     'react',
     'react-redux',
     'react-router',
-    'redux'
+    'redux',
   ],
 
   // ----------------------------------
@@ -57,8 +58,8 @@ const config = {
   // ----------------------------------
   coverage_reporters : [
     { type : 'text-summary' },
-    { type : 'lcov', dir : 'coverage' }
-  ]
+    { type : 'lcov', dir : 'coverage' },
+  ],
 }
 
 /************************************************
@@ -76,14 +77,14 @@ Edit at Your Own Risk
 // N.B.: globals added here must _also_ be added to .eslintrc
 config.globals = {
   'process.env'  : {
-    'NODE_ENV' : JSON.stringify(config.env)
+    'NODE_ENV' : JSON.stringify(config.env),
   },
   'NODE_ENV'     : config.env,
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
   '__COVERAGE__' : !argv.watch && config.env === 'test',
-  '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
+  '__BASENAME__' : JSON.stringify(process.env.BASENAME || ''),
 }
 
 // ------------------------------------
@@ -93,7 +94,9 @@ const pkg = require('../package.json')
 
 config.compiler_vendors = config.compiler_vendors
   .filter((dep) => {
-    if (pkg.dependencies[dep]) return true
+    if (pkg.dependencies[dep]) {
+      return true
+    }
 
     debug(
       `Package "${dep}" was not found as an npm dependency in package.json; ` +
@@ -114,7 +117,7 @@ config.paths = {
   base   : base,
   client : base.bind(null, config.dir_client),
   public : base.bind(null, config.dir_public),
-  dist   : base.bind(null, config.dir_dist)
+  dist   : base.bind(null, config.dir_dist),
 }
 
 // ========================================================

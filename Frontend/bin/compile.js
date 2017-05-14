@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const fs = require('fs-extra')
 const webpack = require('webpack')
 const debug = require('debug')('app:bin:compile')

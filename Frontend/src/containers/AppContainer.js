@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component, PropTypes } from 'react'
 import { browserHistory, Router } from 'react-router'
 import { Provider } from 'react-redux'
 
-class AppContainer extends Component {
-  static propTypes = {
+const AppContainer  = React.createClass({
+  propTypes: {
     routes : PropTypes.object.isRequired,
-    store  : PropTypes.object.isRequired
-  }
+    store  : PropTypes.object.isRequired,
+  },
 
   shouldComponentUpdate () {
     return false
-  }
+  },
 
   render () {
     const { routes, store } = this.props
@@ -23,7 +22,7 @@ class AppContainer extends Component {
         </div>
       </Provider>
     )
-  }
-}
+  },
+})
 
 export default AppContainer

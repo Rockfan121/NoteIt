@@ -17,9 +17,9 @@ const webpackConfig = {
   devtool : project.compiler_devtool,
   resolve : {
     root       : project.paths.client(),
-    extensions : ['', '.js', '.jsx', '.json']
+    extensions : ['', '.js', '.jsx', '.json'],
   },
-  module : {}
+  module : {},
 }
 // ------------------------------------
 // Entry Points
@@ -30,7 +30,7 @@ webpackConfig.entry = {
   app : __DEV__
     ? [APP_ENTRY].concat(`webpack-hot-middleware/client?path=${project.compiler_public_path}__webpack_hmr`)
     : [APP_ENTRY],
-  vendor : project.compiler_vendors
+  vendor : project.compiler_vendors,
 }
 
 // ------------------------------------
@@ -39,7 +39,7 @@ webpackConfig.entry = {
 webpackConfig.output = {
   filename   : `[name].[${project.compiler_hash_type}].js`,
   path       : project.paths.dist(),
-  publicPath : project.compiler_public_path
+  publicPath : project.compiler_public_path,
 }
 
 // ------------------------------------
@@ -62,9 +62,9 @@ webpackConfig.plugins = [
     filename : 'index.html',
     inject   : 'body',
     minify   : {
-      collapseWhitespace : true
-    }
-  })
+      collapseWhitespace : true,
+    },
+  }),
 ]
 
 // Ensure that the compiler exits on errors during testing so that
@@ -98,8 +98,8 @@ if (__DEV__) {
       compress : {
         unused    : true,
         dead_code : true,
-        warnings  : false
-      }
+        warnings  : false,
+      },
     }),
     new webpack.optimize.AggressiveMergingPlugin()
   )
@@ -109,7 +109,7 @@ if (__DEV__) {
 if (!__TEST__) {
   webpackConfig.plugins.push(
     new webpack.optimize.CommonsChunkPlugin({
-      names : ['vendor']
+      names : ['vendor'],
     })
   )
 }
@@ -122,10 +122,10 @@ webpackConfig.module.loaders = [{
   test    : /\.(js|jsx)$/,
   exclude : /node_modules/,
   loader  : 'babel',
-  query   : project.compiler_babel
+  query   : project.compiler_babel,
 }, {
   test   : /\.json$/,
-  loader : 'json'
+  loader : 'json',
 }]
 
 // ------------------------------------
@@ -142,8 +142,8 @@ webpackConfig.module.loaders.push({
     'style',
     BASE_CSS_LOADER,
     'postcss',
-    'sass?sourceMap'
-  ]
+    'sass?sourceMap',
+  ],
 })
 webpackConfig.module.loaders.push({
   test    : /\.css$/,
@@ -151,12 +151,12 @@ webpackConfig.module.loaders.push({
   loaders : [
     'style',
     BASE_CSS_LOADER,
-    'postcss'
-  ]
+    'postcss',
+  ],
 })
 
 webpackConfig.sassLoader = {
-  includePaths : project.paths.client('styles')
+  includePaths : project.paths.client('styles'),
 }
 
 webpackConfig.postcss = [
@@ -164,17 +164,17 @@ webpackConfig.postcss = [
     autoprefixer : {
       add      : true,
       remove   : true,
-      browsers : ['last 2 versions']
+      browsers : ['last 2 versions'],
     },
     discardComments : {
-      removeAll : true
+      removeAll : true,
     },
     discardUnused : false,
     mergeIdents   : false,
     reduceIdents  : false,
     safe          : true,
-    sourcemap     : true
-  })
+    sourcemap     : true,
+  }),
 ]
 
 // File loaders
@@ -209,7 +209,7 @@ if (!__DEV__) {
 
   webpackConfig.plugins.push(
     new ExtractTextPlugin('[name].[contenthash].css', {
-      allChunks : true
+      allChunks : true,
     })
   )
 }

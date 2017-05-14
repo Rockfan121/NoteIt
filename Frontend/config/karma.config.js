@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 const argv = require('yargs').argv
 const project = require('./project.config')
 const webpackConfig = require('./webpack.config')

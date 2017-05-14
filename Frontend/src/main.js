@@ -39,14 +39,14 @@ if (__DEV__) {
       try {
         renderApp()
       } catch (error) {
-        // console.error(error)
+        console.error(error)
         renderError(error)
       }
     }
 
     // Setup hot module replacement
     module.hot.accept('./routes/index', () =>
-      setImmediate(() => {
+      setImmediate(() => {       // eslint-disable-line
         ReactDOM.unmountComponentAtNode(MOUNT_NODE)
         render()
       })

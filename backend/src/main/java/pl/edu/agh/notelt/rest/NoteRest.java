@@ -24,6 +24,6 @@ public class NoteRest {
     @GetMapping
     @CrossOrigin(value = "http://localhost:3000")
     public List<Note> getTopics() {
-        return Lists.newArrayList(new Note("temat", "test1"), new Note("temat2", "test2"));
+        return Lists.newArrayList(new Note("tytul1", "content1"), new Note("tytul2", "content2"));
     }
 }
