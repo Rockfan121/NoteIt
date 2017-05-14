@@ -4,9 +4,9 @@ import Header from '../../components/Header'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
- const CoreLayout = ({ children }) => (
+const CoreLayout = ({ children }) => (
   <div className='container text-center'>
-    <Header text='Note it'/>
+    <Header text='Note it' />
     <div className='core-layout__viewport'>
       {children}
     </div>
@@ -14,7 +14,7 @@ import '../../styles/core.scss'
 )
 
 CoreLayout.propTypes = {
-  children : PropTypes.element.isRequired
+  children: PropTypes.element.isRequired
 }
 
 export default CoreLayout
