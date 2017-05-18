@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import './HomeView.scss'
 
 export const HomeView = () => (
-  <div>
+  <div className='homeContent'>
     <h4>Welcome!</h4>
     <Link to='/notes'>
       <h1>Notes</h1>
