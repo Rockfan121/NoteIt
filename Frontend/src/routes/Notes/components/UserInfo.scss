@@ -1,0 +1,25 @@
+@import 'colors';
+
+.userPane {
+  margin: 0px;
+  margin-bottom: auto;
+  padding: 10px;
+  float: left;
+  height: 100%;
+  width: 250px;
+  overflow: auto;
+
+  display: block;
+  border-right: 1px solid $gray;
+  color: $dark-gray;
+
+  .userHeader{
+    font-weight: bold;  
+    font-size: large;
+  }
+  .userPosts{
+    font-size: small;
+  }
+
+}
+

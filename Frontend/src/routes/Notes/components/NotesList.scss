@@ -1,0 +1,22 @@
+@import 'colors';
+
+.notesList {
+  margin: 0px;
+  padding: 10px;
+  float: left;
+  height: 100%;
+  width: calc(100%-250px);
+  overflow: auto;
+
+  .note {
+    border: 1px solid $blue;
+    backgorund-color: $light_blue;
+    color: $dark_gray;
+    margin: 5px;
+    padding: 5px;
+    
+  }
+  h2 {
+    font-size: 12px;
+  }
+}

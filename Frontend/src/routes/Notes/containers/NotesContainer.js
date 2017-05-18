@@ -3,6 +3,9 @@ import { fetchNotes } from 'data/NoteActions'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import NotesList from '../components/NotesList'
+import UserInfo from '../components/UserInfo'
+
 const notesContainer = React.createClass({
   propTypes: {
     fetchN: PropTypes.func.isRequired,
@@ -24,12 +27,18 @@ const notesContainer = React.createClass({
   },
 
   render() {
-    const notes = this.state.notes.map((t, i) => {
+    const userData = {
+      name: 'Name',
+      surname: 'Surname',
+      nrOfNotes: 20,
+    }
+    /*const notes = this.state.notes.map((t, i) => {
       return <h1 key = {i}>{t.title} {t.content}</h1>
-    })
+    })*/
     return (
-      <div>
-        {notes}
+      <div style={{ height: '100%' }}>
+        <UserInfo userData={userData} />
+        <NotesList notes={this.state.notes} />
       </div>
     )
   },
