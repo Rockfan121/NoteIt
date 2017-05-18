@@ -10,7 +10,17 @@ const NotesList = React.createClass({
   },
   render() {
     const notes = this.props.notes.map((t, i) => {
-      return <h2 key = {i}>{t.title} {t.content}</h2>
+      return (
+        <div key={i}
+          className='note'>
+          <p className='title'>
+            {t.title} 
+          </p>
+          <p className='noteContent'>
+            {t.content}
+          </p>
+        </div>
+      )
     })
     return (
       <div className='notesList'>

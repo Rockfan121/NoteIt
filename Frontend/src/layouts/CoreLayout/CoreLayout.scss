@@ -12,6 +12,7 @@
   margin: 0px;
   padding: 0px;
   font-size: 15px;
+  overflow: hidden;
 }
 .content {
   display: block;
@@ -31,7 +32,7 @@
     color: $white;
     background: $blue;
     border: 1px solid $blue;
-    border-radius: 2px;
+    border-radius: 5px;
     -webkit-transition-duration: 0.2s;
     transition-duration: 0.2s;
 

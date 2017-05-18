@@ -1,22 +1,35 @@
 @import 'colors';
 
 .notesList {
+  display: block;
   margin: 0px;
   padding: 10px;
   float: left;
   height: 100%;
-  width: calc(100%-250px);
+  width: calc(100% - 250px);
   overflow: auto;
 
   .note {
-    border: 1px solid $blue;
-    backgorund-color: $light_blue;
+    display: block;
+    border: 1px solid $light_blue;
+    border-radius: 10px;
+    background-color: $very_light_blue;
     color: $dark_gray;
-    margin: 5px;
-    padding: 5px;
-    
-  }
-  h2 {
-    font-size: 12px;
+    margin: 7px auto 7px 7px;
+    padding: 10px;
+    min-width: 300px;
+    //width: min-content;
+    max-width: calc(100% - 16px);
+
+    .title {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .noteContent {
+      max-width: calc(100% - 20px);
+      margin: 0px 10px;
+      min-width: 270px;
+      word-wrap: break-word;
+    }
   }
 }

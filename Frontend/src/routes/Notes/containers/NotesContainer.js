@@ -30,13 +30,11 @@ const notesContainer = React.createClass({
     const userData = {
       name: 'Name',
       surname: 'Surname',
-      nrOfNotes: 20,
+      nrOfNotes: this.state.notes.length,
     }
-    /*const notes = this.state.notes.map((t, i) => {
-      return <h1 key = {i}>{t.title} {t.content}</h1>
-    })*/
+
     return (
-      <div style={{ height: '100%' }}>
+      <div style={{ height: '100%', width: '100%' }}>
         <UserInfo userData={userData} />
         <NotesList notes={this.state.notes} />
       </div>
