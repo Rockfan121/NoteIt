@@ -6,7 +6,7 @@ const Header = React.createClass({
     myTitle: React.PropTypes.string.isRequired,
     buttons: React.PropTypes.array,
   },
-  render(){
+  render() {
     const buttons = this.props.buttons != null 
     ? (this.props.buttons.map((btnName, i) => {
       return (
