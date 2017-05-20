@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from "react-router"
+import PropTypes from 'prop-types'
 import Header from '../../components/Header'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
 const CoreLayout = React.createClass({
   propTypes: {
-    children : React.PropTypes.element.isRequired,  
+    children : PropTypes.element.isRequired,  
   },
   render() {
     const buttons = [

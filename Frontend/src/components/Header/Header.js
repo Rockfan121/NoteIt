@@ -1,10 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Header.scss'
 
 const Header = React.createClass({
   propTypes: {
-    myTitle: React.PropTypes.string.isRequired,
-    buttons: React.PropTypes.array,
+    myTitle: PropTypes.string.isRequired,
+    buttons: PropTypes.array,
   },
   render() {
     const buttons = this.props.buttons != null 
