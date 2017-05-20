@@ -19,7 +19,7 @@ const CoreLayout = React.createClass({
       <div className='layout'>
         <Header myTitle='NoteIt!' 
           buttons={buttons} />
-        <div className='content'>
+        <div className='mainContent'>
           {this.props.children}
         </div>
       </div>

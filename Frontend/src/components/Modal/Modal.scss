@@ -1,0 +1,29 @@
+@import 'colors';
+
+$modal_z_index: 11;
+$modal_margin: 60px;
+
+.overlay {
+  z-index: $modal_z_index;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+}
+.content {
+  z-index: $modal_z_index;
+  background-color: $white;
+  border-radius: 10px;
+  overflow: auto;
+  position: absolute;
+  padding: 20px;
+  outline: none;
+
+  margin: $modal_margin;
+  top: $modal_margin;
+  bottom: $modal_margin;
+  right: $modal_margin;
+  left: $modal_margin;
+}
