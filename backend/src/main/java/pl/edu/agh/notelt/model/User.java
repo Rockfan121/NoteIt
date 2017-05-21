@@ -15,7 +15,7 @@ public class User {
     @Column
     private String name;
 
-    @Column
+    @Column(length = 3333)
     private String token;
 
     @OneToMany(cascade = CascadeType.ALL)
