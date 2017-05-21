@@ -15,6 +15,9 @@ public class User {
     @Column
     private String name;
 
+    @Column
+    private String token;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_note", joinColumns = {@JoinColumn(name = "user_id")})
     private List<Note> notes;
@@ -26,6 +29,14 @@ public class User {
     public User(String name) {
         this.name = name;
         notes = Lists.emptyList();
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public int getId() {

@@ -2,6 +2,7 @@ import React from "react"
 import { fetchNotes } from 'data/NoteActions'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 import NotesList from '../components/NotesList'
 import UserInfo from '../components/UserInfo'
@@ -45,6 +46,8 @@ const notesContainer = React.createClass({
 const NotesContainer = connect(
   (state) => {
     const A = state.notes
+    // set token value (needed in page content refreshing)
+    axios.defaults.headers.common['Authorization'] =  state.token // bug: token is undefined (should be saved in homeview response)
     return {
       notes: A.get('notes'),
     }

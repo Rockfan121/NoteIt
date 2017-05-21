@@ -2,12 +2,23 @@ import React from 'react'
 import { Link } from 'react-router'
 import './HomeView.scss'
 import GoogleLogin from 'react-google-login'
-
+import axios from 'axios'
 
 // eslint-disable-next-line react/prefer-es6-class
 class HomeView extends React.Component {
   responseGoogle = (response) => {
+    const token = response.tokenObj.id_token
+    axios.defaults.headers.common['Authorization'] =  token
+    this.setState({ 'token': token }) // save token value for authorization - doesn't work
+    axios.post('http://localhost:8080/api/users/token', { 'name':'ala','token': 'dfsd' })
+      .then(function (response) {
+        this.setState({ 'userId': response.data }) // save user id - doesn't work too
+      })
+      .catch(function (error) {
+      })
+  }
 
+  responseGoogle2 = (response) => {
   }
 
   render () {
@@ -21,13 +32,12 @@ class HomeView extends React.Component {
             (e) => this.responseGoogle(e)
           }
           onFailure={
-            (e) => this.responseGoogle(e)
+            (e) => this.responseGoogle2(e)
           }
         >G+ login</GoogleLogin>
         <Link to='/notes'>
           <h1>Notes</h1>
         </Link>
-
       </div>
     )
   }
