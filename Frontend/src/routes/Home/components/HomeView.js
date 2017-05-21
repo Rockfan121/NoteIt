@@ -6,15 +6,33 @@ import axios from 'axios'
 
 // eslint-disable-next-line react/prefer-es6-class
 class HomeView extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state={
+      token: null,
+      userId: null,
+    }
+  }
   responseGoogle = (response) => {
     const token = response.tokenObj.id_token
+
     axios.defaults.headers.common['Authorization'] =  token
     this.setState({ 'token': token }) // save token value for authorization - doesn't work
-    axios.post('http://localhost:8080/api/users/token', { 'rfdgfd':'ala' })
+    console.log("State(token): " + this.state.token)
+    axios.post('/api/users/token', { 'rfdgfd':'ala' })
       .then(function (response) {
+        console.log("i'm going to save")
+        console.log("another response: " + response)
+        for (var key in response) {
+          if (response.hasOwnProperty(key)) {
+            console.log(key + " -> " + response[key])
+          }
+        }
         this.setState({ 'userId': response.data }) // save user id - doesn't work too
+        console.log("State(userId): " + this.state.userId)
       })
       .catch(function (error) {
+        console.log("an error occurred")
       })
   }
 
