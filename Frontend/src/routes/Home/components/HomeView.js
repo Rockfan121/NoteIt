@@ -10,7 +10,7 @@ class HomeView extends React.Component {
     const token = response.tokenObj.id_token
     axios.defaults.headers.common['Authorization'] =  token
     this.setState({ 'token': token }) // save token value for authorization - doesn't work
-    axios.post('http://localhost:8080/api/users/token', { 'name':'ala','token': 'dfsd' })
+    axios.post('http://localhost:8080/api/users/token', { 'rfdgfd':'ala' })
       .then(function (response) {
         this.setState({ 'userId': response.data }) // save user id - doesn't work too
       })
