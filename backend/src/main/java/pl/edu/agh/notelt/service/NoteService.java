@@ -22,7 +22,7 @@ public class NoteService {
     }
 
     public List<Note> getNotes() {
-        List<Note> res = Lists.newArrayList();
+        final List<Note> res = Lists.newArrayList();
         noteRepository.findAll().forEach(res::add);
         return res;
     }

@@ -20,6 +20,7 @@ public class NoteRest {
     @GetMapping
     @CrossOrigin(value = "http://localhost:3000")
     public List<Note> getTopics(@RequestHeader(value = "Authorization") String token) {
+        // System.out.println("*****************" + token);
         return noteService.getNotes();
     }
 }
