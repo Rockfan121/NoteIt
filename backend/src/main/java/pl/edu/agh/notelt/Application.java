@@ -6,10 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @PropertySource(value = {"classpath:props/path.properties"})
-public final class Application {
-    private Application() {
-    }
-
+public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
