@@ -46,8 +46,10 @@ const notesContainer = React.createClass({
 const NotesContainer = connect(
   (state) => {
     const A = state.notes
+    const B = state.auth
     // set token value (needed in page content refreshing)
-    axios.defaults.headers.common['Authorization'] =  state.token // bug: token is undefined (should be saved in homeview response)
+    axios.defaults.headers.common['Authorization'] =  B.get('token') // bug: token is undefined (should be saved in homeview response)
+    
     return {
       notes: A.get('notes'),
     }

@@ -1,42 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router'
-import './HomeView.scss'
+import { connect } from 'react-redux'
 import GoogleLogin from 'react-google-login'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 
+import './HomeView.scss'
+import { responseGoogle, responseGoogle2 } from 'data/AuthActions'
+
 // eslint-disable-next-line react/prefer-es6-class
-class HomeView extends React.Component {
+class homeView extends React.Component {
   constructor(props) {
     super(props)
-    this.state={
-      token: null,
-      userId: null,
-    }
-  }
-  responseGoogle = (response) => {
-    const token = response.tokenObj.id_token
-
-    axios.defaults.headers.common['Authorization'] =  token
-    this.setState({ 'token': token }) // save token value for authorization - doesn't work
-    console.log("State(token): " + this.state.token)
-    axios.post('/api/users/token', { 'rfdgfd':'ala' })
-      .then(function (response) {
-        console.log("i'm going to save")
-        console.log("another response: " + response)
-        for (var key in response) {
-          if (response.hasOwnProperty(key)) {
-            console.log(key + " -> " + response[key])
-          }
-        }
-        this.setState({ 'userId': response.data }) // save user id - doesn't work too
-        console.log("State(userId): " + this.state.userId)
-      })
-      .catch(function (error) {
-        console.log("an error occurred")
-      })
-  }
-
-  responseGoogle2 = (response) => {
   }
 
   render () {
@@ -47,10 +22,10 @@ class HomeView extends React.Component {
           clientId='571224980832-uanbm1kfqji3da8dq326v2b08vfv7akq.apps.googleusercontent.com'
           buttonText='Login'
           onSuccess={
-            (e) => this.responseGoogle(e)
+            (e) => this.props.responseGoogle(e)
           }
           onFailure={
-            (e) => this.responseGoogle2(e)
+            (e) => this.props.responseGoogle2(e)
           }
         >G+ login</GoogleLogin>
         <Link to='/notes'>
@@ -60,5 +35,24 @@ class HomeView extends React.Component {
     )
   }
 }
+
+  homeView.propTypes={
+    responseGoogle: PropTypes.func.isRequired,
+    responseGoogle2: PropTypes.func.isRequired,
+  }
+
+const HomeView = connect(
+  (state) => {
+    return {
+
+    }
+  },
+  (dispatch) => {
+    return {
+      responseGoogle: (e) => responseGoogle(e)(dispatch),
+      responseGoogle2: (e) => responseGoogle2(e)(dispatch),
+    }
+  }
+)(homeView)
 
 export default HomeView
