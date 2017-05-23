@@ -1,11 +1,11 @@
 package pl.edu.agh.notelt.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -25,14 +25,14 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("${path.user}")
 public class UserRest {
-    private static final String NAME = "name";
-
+    private static final String INTEGER_REGEX = "\\d";
     private final Logger logger = Logger.getLogger(UserRest.class.toString());
     private final UserService userService;
     private final NoteService noteService;
@@ -43,50 +43,27 @@ public class UserRest {
         this.noteService = noteService;
     }
 
-    @GetMapping
-    @CrossOrigin(value = "http://localhost:3000")
-    public List<Note> getUsers() {
-
-        return Lists.newArrayList(new Note("temat", "test1"), new Note("temat2", "test2"));
-    }
-
-    @CrossOrigin
-    @RequestMapping(path = "/{userId}", method = RequestMethod.GET)
-    public User getUser(@PathVariable("userId") String userId) {
-        final int id = Integer.parseInt(userId);
-        return userService.getUserById(id);
-    }
-
     @CrossOrigin
     @RequestMapping(path = "/{userId}/notes", method = RequestMethod.GET)
-    public List<Note> getUserNotes(@PathVariable("userId") String userId, @RequestHeader(value = "Authorization") String token) {
-        final int id = Integer.parseInt(userId);
-        return userService.getUserById(id).getNotes();
-    }
-
-    @CrossOrigin
-    @RequestMapping(path = "/{userId}/notes/{noteId}", method = RequestMethod.GET)
-    public Note getUserNote(@PathVariable("userId") String userId, @PathVariable("noteId") String noteId) {
-        final int id = Integer.parseInt(userId);
-        final int note = Integer.parseInt(noteId);
-        return userService.getUserById(id).getNotes().get(note);
-    }
-
-    @CrossOrigin
-    @RequestMapping(path = "/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addUser(@RequestBody Map<String, String> newUser) {
-        if (newUser.containsKey(NAME)) {
-            final User user = new User(newUser.get(NAME));
-            userService.saveUser(user);
+    public ResponseEntity<List<Note>> getUserNotes(@PathVariable("userId") String userId, @RequestHeader(value = "Authorization") String token) {
+        if (!userId.matches(INTEGER_REGEX)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        final int id = Integer.parseInt(userId);
+        final Optional<User> userOptional = userService.getUserById(id);
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        final User user = userOptional.get();
+        if (!user.getToken().equals(token)) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(user.getNotes(), HttpStatus.OK);
     }
 
     @CrossOrigin
     @RequestMapping(path = "/token", method = RequestMethod.GET)
-    public int addToken(@RequestHeader(value = "Authorization") String token) {
-        // System.out.println("------------------------------" + newUser.entrySet());
-        //System.out.println("-==================" + token);
-        // System.out.println(newUser.entrySet());
+    public ResponseEntity<Integer> addToken(@RequestHeader(value = "Authorization") String token) {
         final String urlString = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + token;
         try {
             final URL url = new URL(urlString);
@@ -113,32 +90,45 @@ public class UserRest {
                         new ObjectMapper().readValue(response.toString(), HashMap.class);
                 //CHECKSTYLE:ON
                 final String email = result.get("email").toString();
-                // System.out.println(email);
                 if (userService.getUserByName(email) == null) {
                     userService.saveUser(new User(email));
                 }
-                final User user = userService.getUserByName(email);
+                final User user = userService.getUserByName(email).get();
                 user.setToken(token);
                 userService.saveUser(user);
-                return user.getId();
+                return new ResponseEntity<>(user.getId(), HttpStatus.OK);
             }
         } catch (IOException e) {
             logger.log(Level.INFO, e.toString());
         }
-        return -1;
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @CrossOrigin
-    @RequestMapping(path = "/{userId}/notes/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addNoteToUser(@PathVariable("userId") String userId, @RequestBody Map<String, String> newNote) {
+    @RequestMapping(path = "/{userId}/notes", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addNoteToUser(@PathVariable("userId") String userId, @RequestBody Map<String, String> newNote,
+                                        @RequestHeader(value = "Authorization") String token) {
+        if (!userId.matches(INTEGER_REGEX)) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         final int id = Integer.parseInt(userId);
+        final Optional<User> userOptional = userService.getUserById(id);
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        final User user = userOptional.get();
+        if (!user.getToken().equals(token)) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
         final String title = newNote.get("title");
         final String content = newNote.get("content");
-        // System.out.println(newNote.entrySet());
+        if (title == null || content == null) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         final Note note = new Note(title, content);
         noteService.saveNote(note);
-        final User user = userService.getUserById(id);
         user.addNote(note);
         userService.saveUser(user);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

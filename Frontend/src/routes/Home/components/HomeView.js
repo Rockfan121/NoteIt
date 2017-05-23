@@ -10,7 +10,7 @@ import { responseGoogle, responseGoogle2 } from 'data/AuthActions'
 
 // eslint-disable-next-line react/prefer-es6-class
 class homeView extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
   }
 
@@ -36,16 +36,14 @@ class homeView extends React.Component {
   }
 }
 
-  homeView.propTypes={
-    responseGoogle: PropTypes.func.isRequired,
-    responseGoogle2: PropTypes.func.isRequired,
-  }
+homeView.propTypes = {
+  responseGoogle: PropTypes.func.isRequired,
+  responseGoogle2: PropTypes.func.isRequired,
+}
 
 const HomeView = connect(
   (state) => {
-    return {
-
-    }
+    return {}
   },
   (dispatch) => {
     return {

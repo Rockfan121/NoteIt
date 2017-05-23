@@ -1,10 +1,9 @@
 import { actionType } from './NoteReducer'
 import api from 'api'
 
-
-export const fetchNotes = () => {
+export const fetchNotes = (id) => {
   return (dispatch) => {
-    return api.get('api/notes')
+    return api.get('api/users/' + id + '/notes')
       .then((response) => {
         const notes = response.data
         dispatch({

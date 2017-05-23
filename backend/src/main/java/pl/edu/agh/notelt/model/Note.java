@@ -15,7 +15,7 @@ public class Note {
     @Column
     private String title;
 
-    @Column
+    @Column(length = 5000)
     private String content;
 
     public Note() {

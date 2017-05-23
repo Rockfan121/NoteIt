@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.edu.agh.notelt.model.User;
 import pl.edu.agh.notelt.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private UserRepository userRepository;
@@ -14,12 +16,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User getUserById(Integer id) {
-        return userRepository.findById(id);
+    public Optional<User> getUserById(Integer id) {
+        return Optional.ofNullable(userRepository.findById(id));
     }
 
-    public User getUserByName(String name) {
-        return userRepository.findByName(name);
+    public Optional<User> getUserByName(String name) {
+        return Optional.ofNullable(userRepository.findByName(name));
     }
 
     public void saveUser(User user) {
