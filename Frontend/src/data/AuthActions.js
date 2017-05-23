@@ -1,5 +1,6 @@
 import { actionType } from './AuthReducer'
 import axios from 'axios'
+import api from 'api'
 
 export const responseGoogle = (response) => {
   return (dispatch) => {
@@ -10,7 +11,7 @@ export const responseGoogle = (response) => {
       token,
     })
     console.log("State(token): " + token)
-    axios.post('/api/users/token', { 'rfdgfd':'ala' })
+    api.get('/api/users/token')
           .then(function (response) {
             const userId = response.data
             dispatch({

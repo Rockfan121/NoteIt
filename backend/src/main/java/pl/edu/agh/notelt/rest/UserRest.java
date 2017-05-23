@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("${path.user}")
 public class UserRest {
-    private static final String INTEGER_REGEX = "\\d";
+    private static final String INTEGER_REGEX = "\\d+";
     private final Logger logger = Logger.getLogger(UserRest.class.toString());
     private final UserService userService;
     private final NoteService noteService;
