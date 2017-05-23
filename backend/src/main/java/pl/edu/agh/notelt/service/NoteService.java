@@ -7,6 +7,7 @@ import pl.edu.agh.notelt.model.Note;
 import pl.edu.agh.notelt.repository.NoteRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
@@ -25,5 +26,13 @@ public class NoteService {
         final List<Note> res = Lists.newArrayList();
         noteRepository.findAll().forEach(res::add);
         return res;
+    }
+
+    public Optional<Note> getNote(int id) {
+        return Optional.ofNullable(noteRepository.findById(id));
+    }
+
+    public void removeNote(Note note) {
+        noteRepository.removeNoteById(note.getId());
     }
 }

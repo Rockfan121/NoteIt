@@ -73,7 +73,7 @@
         <module name="IllegalType"/>
         <module name="PackageDeclaration"/>
         <module name="ReturnCount">
-            <property name="max" value="5"/>
+            <property name="max" value="10"/>
         </module>
         <module name="VariableDeclarationUsageDistance"/>
         <module name="DeclarationOrder"/>
@@ -142,7 +142,7 @@
             <property name="max" value="50"/>
         </module>
         <module name="JavaNCSS">
-            <property name="methodMaximum" value="25"/>
+            <property name="methodMaximum" value="30"/>
             <property name="classMaximum" value="200"/>
             <property name="fileMaximum" value="300"/>
         </module>
@@ -205,7 +205,7 @@
 
         <!-- Size violations, http://checkstyle.sourceforge.net/config_sizes.html -->
         <module name="ExecutableStatementCount">
-            <property name="max" value="21"/>
+            <property name="max" value="25"/>
         </module>
         <module name="LineLength">
             <property name="max" value="160"/>

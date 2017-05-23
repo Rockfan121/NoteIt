@@ -32,7 +32,8 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("${path.user}")
 public class UserRest {
-    private static final String INTEGER_REGEX = "\\d+";
+    private static final String INTEGER_REGEX = "\\d{1,9}";
+
     private final Logger logger = Logger.getLogger(UserRest.class.toString());
     private final UserService userService;
     private final NoteService noteService;
@@ -120,8 +121,8 @@ public class UserRest {
         if (!user.getToken().equals(token)) {
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
-        final String title = newNote.get("title");
-        final String content = newNote.get("content");
+        final String title = newNote.getOrDefault("title", null);
+        final String content = newNote.getOrDefault("content", null);
         if (title == null || content == null) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }

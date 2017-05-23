@@ -8,4 +8,5 @@ import pl.edu.agh.notelt.model.Note;
 public interface NoteRepository extends CrudRepository<Note, Integer> {
     Note findById(Integer noteId);
 
+    void removeNoteById(Integer noteId);
 }

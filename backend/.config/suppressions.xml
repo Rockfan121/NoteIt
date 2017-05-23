@@ -7,4 +7,10 @@
     <suppress
             checks="HideUtilityClassConstructorCheck"
             files="Application.java"/>
+    <suppress
+            checks="MultipleStringLiteralsCheck"
+            files="NoteRest.java"/>
+    <suppress
+            checks="NPathComplexity"
+            files="NoteRest.java"/>
 </suppressions>
