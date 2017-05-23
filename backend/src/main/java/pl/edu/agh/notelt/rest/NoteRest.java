@@ -1,9 +1,9 @@
 package pl.edu.agh.notelt.rest;
 
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.agh.notelt.model.Note;
@@ -23,7 +23,8 @@ public class NoteRest {
 
     @GetMapping
     @CrossOrigin(value = "http://localhost:3000")
-    public List<Note> getTopics() {
-        return Lists.newArrayList(new Note("tytul1", "content1"), new Note("tytul2", "content2"));
+    public List<Note> getTopics(@RequestHeader(value = "Authorization") String token) {
+        // System.out.println("*****************" + token);
+        return noteService.getNotes();
     }
 }

@@ -2,7 +2,14 @@ package pl.edu.agh.notelt.model;
 
 import org.assertj.core.util.Lists;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity(name = "user")
@@ -15,6 +22,9 @@ public class User {
     @Column
     private String name;
 
+    @Column(length = 3333)
+    private String token;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_note", joinColumns = {@JoinColumn(name = "user_id")})
     private List<Note> notes;
@@ -26,6 +36,14 @@ public class User {
     public User(String name) {
         this.name = name;
         notes = Lists.emptyList();
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public int getId() {

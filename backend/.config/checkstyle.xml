@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+    <module name="SuppressionCommentFilter"/>
+    <module name="TreeWalker">
+        <!-- Annotations, http://checkstyle.sourceforge.net/config_annotation.html -->
+        <module name="AnnotationLocation"/>
+        <module name="MissingDeprecated"/>
+        <module name="MissingOverride"/>
+        <module name="SuppressWarnings">
+            <property name="format" value="^(?!(unchecked)|(nls)|(CPD-START)|(CPD-END)).*$"/>
+        </module>
+
+        <!-- Block Checks, http://checkstyle.sourceforge.net/config_blocks.html -->
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+        </module>
+        <module name="EmptyCatchBlock"/>
+        <module name="LeftCurly"/>
+        <module name="NeedBraces">
+            <property name="allowSingleLineStatement" value="true"/>
+        </module>
+        <module name="RightCurly"/>
+        <module name="AvoidNestedBlocks"/>
+
+        <!-- Class Design, http://checkstyle.sourceforge.net/config_design.html -->
+        <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true"/>
+            <property name="packageAllowed" value="true"/>
+            <property name="publicMemberPattern" value="^$"/>
+        </module>
+        <module name="FinalClass"/>
+        <module name="InterfaceIsType"/>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="MutableException"/>
+        <module name="ThrowsCount">
+            <property name="max" value="2"/>
+        </module>
+        <module name="InnerTypeLast"/>
+        <module name="OneTopLevelClass"/>
+
+        <!-- Coding, http://checkstyle.sourceforge.net/config_coding.html -->
+        <module name="CovariantEquals"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsAvoidNull"/>
+        <module name="EqualsHashCode"/>
+        <module name="HiddenField">
+            <property name="tokens" value="VARIABLE_DEF"/>
+        </module>
+        <module name="InnerAssignment"/>
+        <module name="ModifiedControlVariable"/>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="StringLiteralEquality"/>
+        <module name="UnnecessaryParentheses"/>
+        <module name="NestedForDepth">
+            <property name="max" value="1"/>
+        </module>
+        <module name="NestedIfDepth">
+            <property name="max" value="1"/>
+        </module>
+        <module name="NestedTryDepth">
+            <property name="max" value="0"/>
+        </module>
+        <module name="NoClone"/>
+        <module name="NoFinalizer"/>
+        <module name="IllegalCatch"/>
+        <module name="IllegalThrows"/>
+        <module name="IllegalType"/>
+        <module name="PackageDeclaration"/>
+        <module name="ReturnCount">
+            <property name="max" value="5"/>
+        </module>
+        <module name="VariableDeclarationUsageDistance"/>
+        <module name="DeclarationOrder"/>
+        <module name="ParameterAssignment"/>
+        <module name="ExplicitInitialization"/>
+        <module name="DefaultComesLast"/>
+        <module name="FallThrough"/>
+        <module name="FinalLocalVariable"/>
+        <module name="MultipleStringLiterals">
+            <property name="allowedDuplicates" value="1"/>
+        </module>
+        <module name="MissingSwitchDefault"/>
+        <module name="OneStatementPerLine"/>
+        <module name="OverloadMethodsDeclarationOrder"/>
+
+        <!-- Imports, http://checkstyle.sourceforge.net/config_imports.html -->
+        <module name="AvoidStarImport"/>
+        <module name="AvoidStaticImport">
+            <property name="excludes"
+                      value="org.bytedeco.javacpp.avcodec.*, org.bytedeco.javacpp.avformat.*, org.bytedeco.javacpp.avutil.*, org.bytedeco.javacpp.swscale.*"/>
+        </module>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="junit.framework, sun"/>
+        </module>
+        <module name="IllegalInstantiation"/>
+        <module name="ImportOrder">
+            <property name="ordered" value="false"/>
+            <property name="separated" value="false"/>
+            <property name="option" value="bottom"/>
+        </module>
+
+        <!-- Javadoc, http://checkstyle.sourceforge.net/config_javadoc.html -->
+        <module name="JavadocStyle"/>
+        <module name="NonEmptyAtclauseDescription"/>
+
+        <!-- Metrics, http://checkstyle.sourceforge.net/config_metrics.html -->
+        <module name="BooleanExpressionComplexity"/>
+        <module name="ClassDataAbstractionCoupling">
+            <property name="max" value="11"/>
+            <property name="excludedClasses"
+                      value="boolean, byte, char, double, float, int, long, short, void, Boolean, Byte, Character, Double, Float,
+                      Integer, Long, Short, Void, Object, Class, String, StringBuffer, StringBuilder, Exception, RuntimeException, Throwable, Collection, List,
+                      ArrayList, Deque, Queue, LinkedList, Set, HashSet, SortedSet, TreeSet, Map, HashMap, SortedMap, TreeMap, Logger, LoggerFactory, Optional,
+                      Scope, Component, Autowired, EventBus, URL, Button, Label, TextArea, Slider, Initializable, HBox, VBox, Image, ImageView, Arrays, UUID,
+                      Collectors, Pane, BorderPane, FXML, MouseEvent, ActionEvent, DragEvent, AtomicBoolean, TextField, SplitPane, StackPane, Media, MediaPlayer,
+                      File, Node, ResourceBundle, FileNotFoundUncheckedException, ChangeListener, Cursor, Text, BufferedImage, BooleanProperty, ObjectProperty,
+                      ByteArrayInputStream"/>
+        </module>
+        <module name="ClassFanOutComplexity">
+            <property name="max" value="23"/>
+            <property name="excludedClasses"
+                      value="boolean, byte, char, double, float, int, long, short, void, Boolean, Byte, Character, Double, Float,
+                      Integer, Long, Short, Void, Object, Class, String, StringBuffer, StringBuilder, Exception, RuntimeException, Throwable, Collection, List,
+                      ArrayList, Deque, Queue, LinkedList, Set, HashSet, SortedSet, TreeSet, Map, HashMap, SortedMap, TreeMap, Logger, LoggerFactory, Optional,
+                      Scope, Component, Autowired, EventBus, URL, Button, Label, TextArea, Slider, Initializable, HBox, VBox, Image, ImageView, Arrays, UUID,
+                      Collectors, Pane, BorderPane, FXML, KeyCodeCombination, MouseEvent, ActionEvent, DragEvent, AtomicBoolean, TextField, SplitPane, StackPane,
+                      Media, MediaPlayer, MediaView, File, Node, ResourceBundle, Tooltip, Cursor, Text, BufferedImage, BooleanProperty, ObjectProperty,
+                      ByteArrayInputStream"/>
+        </module>
+        <module name="CyclomaticComplexity">
+            <property name="max" value="10"/>
+        </module>
+        <module name="NPathComplexity">
+            <property name="max" value="50"/>
+        </module>
+        <module name="JavaNCSS">
+            <property name="methodMaximum" value="25"/>
+            <property name="classMaximum" value="200"/>
+            <property name="fileMaximum" value="300"/>
+        </module>
+
+        <!-- Miscellaneous, http://checkstyle.sourceforge.net/config_misc.html -->
+        <module name="UpperEll"/>
+        <module name="ArrayTypeStyle"/>
+        <module name="AvoidEscapedUnicodeCharacters"/>
+        <module name="CommentsIndentation"/>
+        <module name="Indentation"/>
+        <module name="OuterTypeFilename"/>
+        <module name="TrailingComment">
+            <property name="legalComment" value="NON-NLS"/>
+        </module>
+
+        <!-- Modifiers, http://checkstyle.sourceforge.net/config_modifier.html -->
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+
+        <!-- Naming Conventions, http://checkstyle.sourceforge.net/config_naming.html -->
+        <module name="ClassTypeParameterName">
+            <property name="format" value="^[A-Z]{1,4}$"/>
+        </module>
+        <module name="ConstantName">
+            <property name="format" value="^((log)|([A-Z][A-Z0-9]*(_[A-Z0-9]+)*))$"/>
+        </module>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="MethodTypeParameterName">
+            <property name="format" value="^[A-Z]{1,4}$"/>
+        </module>
+        <module name="InterfaceTypeParameterName">
+            <property name="format" value="^[A-Z]{1,4}$"/>
+        </module>
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName">
+            <property name="format" value="^([A-Z][a-z0-9]+)+$"/>
+        </module>
+        <module name="AbbreviationAsWordInName">
+            <property name="allowedAbbreviationLength" value="1"/>
+        </module>
+
+        <!-- Regexp, http://checkstyle.sourceforge.net/config_regexp.html -->
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="System\.(out|err)\.print"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="Use logger instead of System.*.print()"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="printStackTrace\(\)"/>
+            <property name="ignoreComments" value="true"/>
+            <property name="message" value="printStackTrace() is wrong method of handling an exception"/>
+        </module>
+
+        <!-- Size violations, http://checkstyle.sourceforge.net/config_sizes.html -->
+        <module name="ExecutableStatementCount">
+            <property name="max" value="21"/>
+        </module>
+        <module name="LineLength">
+            <property name="max" value="160"/>
+        </module>
+        <module name="AnonInnerLength">
+            <property name="max" value="11"/>
+        </module>
+        <module name="ParameterNumber">
+            <property name="max" value="6"/>
+            <property name="tokens" value="METHOD_DEF"/>
+        </module>
+        <module name="MethodCount">
+            <property name="maxTotal" value="27"/>
+            <property name="maxPrivate" value="21"/>
+            <property name="maxPackage" value="13"/>
+            <property name="maxProtected" value="10"/>
+            <property name="maxPublic" value="18"/>
+        </module>
+        <module name="OuterTypeNumber"/>
+
+        <!-- Whitespace, http://checkstyle.sourceforge.net/config_whitespace.html -->
+        <module name="GenericWhitespace"/>
+        <module name="EmptyForInitializerPad"/>
+        <module name="EmptyForIteratorPad">
+            <property name="option" value="space"/>
+        </module>
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter"/>
+        <module name="NoWhitespaceBefore"/>
+        <module name="OperatorWrap"/>
+        <module name="ParenPad"/>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+        <module name="NoLineWrap"/>
+        <module name="EmptyLineSeparator">
+            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+        </module>
+        <module name="SeparatorWrap">
+            <property name="tokens" value="COMMA"/>
+        </module>
+
+        <module name="FileContentsHolder"/>
+    </module>
+
+    <module name="RegexpMultiline">
+        <property name="format" value="\n\s*\n\s*\n"/>
+        <property name="message" value="Too many empty lines"/>
+    </module>
+
+    <module name="FileTabCharacter"/>
+
+    <module name="SuppressionCommentFilter">
+        <!-- // CHECKSTYLE.OFF: ParameterNumber - I really need all those params here -->
+        <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+) \- \w+"/>
+        <!-- // CHECKSTYLE.ON: ParameterNumber -->
+        <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
+        <property name="checkFormat" value="$1"/>
+    </module>
+
+    <module name="SuppressionFilter">
+        <property name="file" value=".config/suppressions.xml"/>
+    </module>
+
+</module>
