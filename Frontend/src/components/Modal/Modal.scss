@@ -1,7 +1,33 @@
 @import 'colors';
 
 $modal_z_index: 11;
-$modal_margin: 60px;
+$margin: 60px;
+@mixin content($width) {
+  z-index: $modal_z_index;
+  background-color: $white;
+  border-radius: 10px;
+  overflow: auto;
+  position: absolute;
+  padding: 15px;
+  outline: none;
+
+  //margin: $margin;
+  
+  //top: $margin;
+  //bottom: $margin;
+  //right: $margin;
+  //left: $margin;
+
+  max-height: calc(100% - 60px);
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: $width;
+  margin: 0;
+}
 
 .overlay {
   z-index: $modal_z_index;
@@ -12,18 +38,21 @@ $modal_margin: 60px;
   right: 0px;
   left: 0px;
 }
-.content {
-  z-index: $modal_z_index;
-  background-color: $white;
-  border-radius: 10px;
-  overflow: auto;
-  position: absolute;
-  padding: 20px;
-  outline: none;
+.normalContent {
+ @include content(400px);
+}
+.deleteContent {
+  @include content(300px);
+}
 
-  margin: $modal_margin;
-  top: $modal_margin;
-  bottom: $modal_margin;
-  right: $modal_margin;
-  left: $modal_margin;
+h1 {
+  font-size: 17px;
+  font-weight: bold;
+}
+h6 {
+  font-size: 13px;
+  font-weight: bold;
+}
+p {
+  font-size: 14px;
 }

@@ -22,6 +22,7 @@ export const responseGoogle = (response) => {
           })
           .catch(function (error) {
             console.log("an error occurred")
+            console.log(error)
           })
   }
 }

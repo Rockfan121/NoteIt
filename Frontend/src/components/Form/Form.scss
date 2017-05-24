@@ -1,0 +1,83 @@
+@import 'colors';
+@mixin formInputs {
+  border: 1px solid $gray;
+  width: calc(100% - 20px);
+  border-radius: 5px;
+  margin: 10px;
+  //margin-bottom: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.form {
+  color: $dark_gray;
+  font-size: 15px;
+  border: 1px solid $light_gray;
+  border-radius: 10px;
+  //padding: 10px;
+  margin: 0px;
+
+  .title {
+    font-size: 17px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid $light_gray;
+    margin:10px;
+  }
+
+  .input {
+    @include formInputs;
+    &:focus{
+      box-shadow: 0px 0px 10px $blue;
+      border-color: $light_blue;
+    }
+  }
+
+  .textarea {
+    @include formInputs;
+    height: 100px;
+    resize: none;
+    &:focus{
+      box-shadow: 0px 0px 10px $blue;
+      border-color: $light_blue;
+    }
+  }
+
+  .label {
+    color: $dark_gray;
+    font-size: 15px;
+    margin: 3px;
+    margin-bottom: 0px;
+    font-weight: bold;
+  }
+}
+
+.submitBtn {
+    display: block;
+    margin: 10px auto;
+    //margin: 10px;
+    padding: 10px 20px;
+    //width: calc(100% - 20px);
+    font-size: 14px;
+    font-weight: bold;
+    color: $white;
+    background: $blue;
+    border: 1px solid $blue;
+    border-radius: 5px;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+
+    &:hover {
+      color: $white;
+      background: lighten($blue, 20%);
+      text-decoration: none;
+    }
+
+    &:focus {
+      color: $white;
+      text-decoration: none;
+    }
+  }

@@ -17,16 +17,44 @@ const NotesList = React.createClass({
       isEditOpen: false,
       isDeleteOpen: false,
       isAddOpen: false,
+      title: '',
+      content: '',
     }
   },
 
+  getNoteTitle(e) {
+    console.log(e.target.parentElement.className)
+    return e.target.parentElement.getAttribute('data-title') 
+  },
+
+  getNoteContent(e) {
+    console.log(e.target.parentElement.className)
+    return e.target.parentElement.getAttribute('data-content') 
+  },
+
+  fillState(e) {
+    const node = this.findAncestor(e.target, 'note')
+    const title = node.getAttribute('data-title') 
+    const content = node.getAttribute('data-content') 
+    this.setState({ 
+      title: title,
+      content: content,
+    })
+  },
+
   handleAddClick(e) {
-    this.setState({ isAddOpen: true })
+    this.setState({ 
+      title: '',
+      content: '',
+      isAddOpen: true,
+    })
   },
   handleEditClick(e) {
+    this.fillState(e)
     this.setState({ isEditOpen: true })
   },
   handleDeleteClick(e) {
+    this.fillState(e)
     this.setState({ isDeleteOpen: true })
   },
   handleClickOutside(e) {
@@ -36,6 +64,17 @@ const NotesList = React.createClass({
       isAddOpen: false,
     })
   },
+
+  findAncestor (el, cls) {
+    while ((el.parentElement) && !el.classList.contains(cls)) {
+      el = el.parentElement
+    }
+    return el
+  },
+
+  onSubmit(e) {
+
+  }, 
 
   render() {
     const iconsColor = '#424242'
@@ -65,12 +104,17 @@ const NotesList = React.createClass({
     const notes = this.props.notes.map((t, i) => {
       return (
         <div key={i}
-          className='note'>
+          className='note'
+          data-title={t.title}
+          data-content={t.content}
+          >
           <div className='titleBar'>
             <p className='title'>
               {t.title} 
             </p>
-            <div className='icons'>
+            <div className='icons'
+              key={i}
+            >
               {iconsTags}
             </div>
           </div>
@@ -86,6 +130,8 @@ const NotesList = React.createClass({
         isCreated={false}
         isOpen={this.state.isAddOpen}
         onRequestClose={this.handleClickOutside}
+        onSubmit={this.onSubmit}
+        values={this.state}
       />
     )
     const editModal = (
@@ -93,12 +139,16 @@ const NotesList = React.createClass({
         isCreated={true}
         isOpen={this.state.isEditOpen}
         onRequestClose={this.handleClickOutside}
+        onSubmit={this.onSubmit}
+        values={this.state}
       />
     )
     const deleteModal = (
       <DeleteModal
         isOpen={this.state.isDeleteOpen}
         onRequestClose={this.handleClickOutside}
+        onSubmit={this.onSubmit}
+        values={this.state}
       />
     )
 
