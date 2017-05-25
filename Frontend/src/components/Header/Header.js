@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Header.scss'
 
-const Header = React.createClass({
-  propTypes: {
-    myTitle: PropTypes.string.isRequired,
-    buttons: PropTypes.array,
-  },
+class Header extends React.Component{
+  constructor(props) {
+    super(props)
+  }
+
+  
   render() {
     const buttons = this.props.buttons != null 
     ? (this.props.buttons.map((btnName, i) => {
@@ -33,8 +34,13 @@ const Header = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
+
+Header.propTypes = {
+    myTitle: PropTypes.string.isRequired,
+    buttons: PropTypes.array,
+  }
 
 
 export default Header

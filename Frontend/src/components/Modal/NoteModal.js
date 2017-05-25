@@ -5,19 +5,12 @@ import Modal from 'react-modal'
 import './Modal.scss'
 import { Form, FormInput, FormTextarea } from 'components/Form'
 
-const NoteModal = React.createClass({
-  propTypes: {
-    isOpen: PropTypes.bool.isRequired,
-    isCreated: PropTypes.bool.isRequired,
-    onRequestClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    values: PropTypes.object.isRequired,
-  },
-
-  getInitialState() {
-    return {
+class NoteModal extends React.Component{
+  constructor(props) {
+    super(props)
+    this.state = {
     }
-  },
+  }
 
   componentWillMount(newProps) {
     this.setState({
@@ -26,7 +19,7 @@ const NoteModal = React.createClass({
       userId: this.props.values.userId,
       id: this.props.values.id,
     })
-  },
+  }
 
   componentWillReceiveProps(newProps) {
     this.setState({
@@ -35,11 +28,11 @@ const NoteModal = React.createClass({
       userId: newProps.values.userId,
       id: newProps.values.id,
     })
-  },
+  }
 
-  onFormUpdate(value, type) {
+  onFormUpdate = (value, type)  => {
     this.setState({ [type]: value })
-  },
+  }
 
 
   render() {
@@ -84,7 +77,15 @@ const NoteModal = React.createClass({
         </Modal>
       </div>
     )
-  },
-})
+  }
+}
+
+NoteModal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    isCreated: PropTypes.bool.isRequired,
+    onRequestClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    values: PropTypes.object.isRequired,
+  }
 
 export default NoteModal

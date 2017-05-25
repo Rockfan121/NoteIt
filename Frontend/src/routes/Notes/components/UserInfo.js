@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import './UserInfo.scss'
 
-const UserInfo = React.createClass({
-  propTypes: {
-    userData: PropTypes.object.isRequired,
-  },
+class UserInfo extends React.Component{
+  constructor(props) {
+    super(props)
+  }
 
   render() {
     const userData = this.props.userData
@@ -24,6 +24,11 @@ const UserInfo = React.createClass({
         </span>
       </div>
     )
-  },
-})
+  }
+}
+
+UserInfo.propTypes= {
+    userData: PropTypes.object.isRequired,
+  }
+  
 export default UserInfo

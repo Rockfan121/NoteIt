@@ -5,22 +5,16 @@ import Modal from 'react-modal'
 import './Modal.scss'
 import { FormButton } from 'components/Form'
 
-const DeleteModal = React.createClass({
-  propTypes: {
-    isOpen: PropTypes.bool.isRequired,
-    onRequestClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    values: PropTypes.object.isRequired,
-  },
-
-  getInitialState() {
-    return {
+class DeleteModal extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
       title: this.props.values.title,
       content: this.props.values.content,
       userId: this.props.values.userId,
       id: this.props.values.id,
     }
-  },
+  }
 
   componentWillReceiveProps(newProps) {
     this.setState({
@@ -29,12 +23,10 @@ const DeleteModal = React.createClass({
       userId: newProps.values.userId,
       id: newProps.values.id,
     })
-  },
+  }
 
-  
 
   render() {
-
     const onSubmit =()=> {
       this.props.onSubmit(this.state)
     }
@@ -58,7 +50,14 @@ const DeleteModal = React.createClass({
         </Modal>
       </div>
     )
-  },
-})
+  }
+}
+
+DeleteModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  values: PropTypes.object.isRequired,
+}
 
 export default DeleteModal

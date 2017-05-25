@@ -2,20 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Icon.scss'
 
-const Icon = React.createClass({
-  getDefaultProps() {
-    return {
-      size: 16,
-    }
-  },
-  propTypes: {
-    icon: PropTypes.array.isRequired,
-    size: PropTypes.number,
-    color: PropTypes.string,
-  },
+class Icon extends React.Component {  
 
   render() {
-    
     const paths = this.props.icon.map((elem, i) => {
       return (
         <path style={{ fill: this.props.color }}
@@ -32,7 +21,16 @@ const Icon = React.createClass({
         {paths}
       </svg>
     )
-  },
-})
+  }
+}
+
+Icon.propTypes = {
+  icon: PropTypes.array.isRequired,
+  size: PropTypes.number,
+  color: PropTypes.string,
+}
+Icon.defaultProps = {
+  size: 16,
+}
 
 export default Icon

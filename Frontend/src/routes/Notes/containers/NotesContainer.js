@@ -8,34 +8,25 @@ import { createNote, updateNote, deleteNote } from 'data/NoteActions'
 import NotesList from '../components/NotesList'
 import UserInfo from '../components/UserInfo'
 
-const notesContainer = React.createClass({
-  propTypes: {
-    fetchN: PropTypes.func.isRequired,
-    deleteN: PropTypes.func.isRequired,
-    createN: PropTypes.func.isRequired,
-    updateN: PropTypes.func.isRequired,
-    notes: PropTypes.any.isRequired,
-    userId: PropTypes.number.isRequired,
-  },
-
+class notesContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      notes: [],
+      userId: 0,
+    }
+  }
+      
   componentWillReceiveProps(newProps) {
     this.setState({ 
       notes: newProps.notes,
       userId: newProps.userId,
     })
-  },
+  }
 
   componentWillMount() {
     this.props.fetchN()
-  },
-
-  getInitialState() {
-    return {
-      notes: [],
-      userId: 0,
-    }
-  },
-
+  }
 
 
   render() {
@@ -56,8 +47,18 @@ const notesContainer = React.createClass({
           deleteN={this.props.deleteN}/>
       </div>
     )
-  },
-})
+  }
+}
+
+notesContainer.propTypes= {
+  fetchN: PropTypes.func.isRequired,
+  deleteN: PropTypes.func.isRequired,
+  createN: PropTypes.func.isRequired,
+  updateN: PropTypes.func.isRequired,
+  notes: PropTypes.any.isRequired,
+  userId: PropTypes.number.isRequired,
+}
+
 let id
 const NotesContainer = connect(
   (state) => {

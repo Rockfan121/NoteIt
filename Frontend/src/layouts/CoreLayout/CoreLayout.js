@@ -5,10 +5,11 @@ import Header from '../../components/Header'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
-const CoreLayout = React.createClass({
-  propTypes: {
-    children : PropTypes.element.isRequired,  
-  },
+class CoreLayout extends React.Component{
+  constructor(props) {
+    super(props)
+  }
+  
   render() {
     const buttons = [
       <Link className='button'
@@ -24,7 +25,11 @@ const CoreLayout = React.createClass({
         </div>
       </div>
     )
-  },
-})
+  }
+}
+
+CoreLayout.propTypes= {
+    children : PropTypes.element.isRequired,  
+  }
 
 export default CoreLayout
