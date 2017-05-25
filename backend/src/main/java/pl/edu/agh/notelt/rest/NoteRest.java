@@ -75,9 +75,9 @@ public class NoteRest {
     }
 
     @CrossOrigin
-    @RequestMapping(path = "/{noteId}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/{noteId}/{userId}", method = RequestMethod.DELETE)
     public ResponseEntity deleteNote(@PathVariable("noteId") String noteId,
-                                     @RequestBody Map<String, String> userData,
+                                     @PathVariable("userId") String userStrId,
                                      @RequestHeader(value = "Authorization") String token) {
         if (!noteId.matches(INTEGER_REGEX)) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -85,10 +85,6 @@ public class NoteRest {
         final int id = Integer.parseInt(noteId);
         final Optional<Note> noteOptional = noteService.getNote(id);
         if (!noteOptional.isPresent()) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        final String userStrId = userData.getOrDefault("userId", null);
-        if (userStrId == null) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         if (!userStrId.matches(INTEGER_REGEX)) {
@@ -106,8 +102,8 @@ public class NoteRest {
         final Note note = noteOptional.get();
         if (user.getNotes().contains(note)) {
             user.getNotes().remove(note);
-            userService.saveUser(user);
             noteService.removeNote(note);
+            userService.saveUser(user);
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
