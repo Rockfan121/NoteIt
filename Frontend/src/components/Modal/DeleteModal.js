@@ -17,6 +17,8 @@ const DeleteModal = React.createClass({
     return {
       title: this.props.values.title,
       content: this.props.values.content,
+      userId: this.props.values.userId,
+      id: this.props.values.id,
     }
   },
 
@@ -24,10 +26,19 @@ const DeleteModal = React.createClass({
     this.setState({
       title: newProps.values.title,
       content: newProps.values.content,
+      userId: newProps.values.userId,
+      id: newProps.values.id,
     })
   },
 
+  
+
   render() {
+
+    const onSubmit =()=> {
+      this.props.onSubmit(this.state)
+    }
+
     return (
       <div>
         <Modal
@@ -42,7 +53,7 @@ const DeleteModal = React.createClass({
           <h6>{this.state.title}</h6>
           <FormButton
             label='Yes'
-            onSubmit={this.props.onSubmit}
+            onSubmit={onSubmit}
             />
         </Modal>
       </div>

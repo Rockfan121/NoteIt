@@ -1,5 +1,8 @@
 import React from "react"
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import axios from 'axios'
+
 import Modal from 'react-modal'
 import Icon from 'components/Icon'
 import DeleteModal from 'components/Modal/DeleteModal'
@@ -9,7 +12,12 @@ import './NotesList.scss'
 
 const NotesList = React.createClass({
   propTypes: {
+    fetchN: PropTypes.func.isRequired,
+    createN: PropTypes.func.isRequired,
+    updateN: PropTypes.func.isRequired,
+    deleteN: PropTypes.func.isRequired,
     notes: PropTypes.any.isRequired,
+    userId: PropTypes.number.isRequired,
   },
 
   getInitialState() {
@@ -19,26 +27,60 @@ const NotesList = React.createClass({
       isAddOpen: false,
       title: '',
       content: '',
+      id: 0,
+      userId: 0,
     }
   },
 
-  getNoteTitle(e) {
-    console.log(e.target.parentElement.className)
-    return e.target.parentElement.getAttribute('data-title') 
+  componentWillMount(){
+    this.setState({ 
+      userId: this.props.userId, 
+    })
+    console.log('Authorization: ' +axios.defaults.headers.common['Authorization'])
   },
 
-  getNoteContent(e) {
-    console.log(e.target.parentElement.className)
-    return e.target.parentElement.getAttribute('data-content') 
+  componentWillReceiveProps(newProps) {
+    this.setState({ 
+      userId: newProps.userId, 
+    })
+    console.log('Authorization: ' +axios.defaults.headers.common['Authorization'])
   },
+
+  createAndFetch(state) {
+    this.props.createN(state)
+      .then((response) =>{
+        this.props.fetchN()    
+      })
+    
+    this.handleClickOutside()
+  },
+
+  updateAndFetch(state) {
+    this.props.updateN(state)
+      .then((response) =>{
+        this.props.fetchN()    
+      })
+    this.handleClickOutside()
+  },
+
+  deleteAndFetch(state) {
+    this.props.deleteN(state)
+      .then((response) =>{
+        this.props.fetchN()    
+      })
+    this.handleClickOutside()
+  },
+
 
   fillState(e) {
     const node = this.findAncestor(e.target, 'note')
     const title = node.getAttribute('data-title') 
     const content = node.getAttribute('data-content') 
+    const id = node.getAttribute('data-id')
     this.setState({ 
       title: title,
       content: content,
+      id: id,
     })
   },
 
@@ -46,6 +88,7 @@ const NotesList = React.createClass({
     this.setState({ 
       title: '',
       content: '',
+      id: 0,
       isAddOpen: true,
     })
   },
@@ -105,6 +148,7 @@ const NotesList = React.createClass({
       return (
         <div key={i}
           className='note'
+          data-id={t.id}
           data-title={t.title}
           data-content={t.content}
           >
@@ -130,7 +174,7 @@ const NotesList = React.createClass({
         isCreated={false}
         isOpen={this.state.isAddOpen}
         onRequestClose={this.handleClickOutside}
-        onSubmit={this.onSubmit}
+        onSubmit={this.createAndFetch}
         values={this.state}
       />
     )
@@ -139,7 +183,7 @@ const NotesList = React.createClass({
         isCreated={true}
         isOpen={this.state.isEditOpen}
         onRequestClose={this.handleClickOutside}
-        onSubmit={this.onSubmit}
+        onSubmit={this.updateAndFetch}
         values={this.state}
       />
     )
@@ -147,7 +191,7 @@ const NotesList = React.createClass({
       <DeleteModal
         isOpen={this.state.isDeleteOpen}
         onRequestClose={this.handleClickOutside}
-        onSubmit={this.onSubmit}
+        onSubmit={this.deleteAndFetch}
         values={this.state}
       />
     )
@@ -168,5 +212,6 @@ const NotesList = React.createClass({
     )
   },
 })
+
 
 export default NotesList

@@ -5,6 +5,7 @@ export const fetchNotes = (id) => {
   return (dispatch) => {
     return api.get('api/users/' + id + '/notes')
       .then((response) => {
+        console.log("Notes has been successfully fetched")
         const notes = response.data
         dispatch({
           type: actionType.NOTES_GET,
@@ -16,8 +17,9 @@ export const fetchNotes = (id) => {
 
 export const createNote = (data) => {
   return(dispatch) => { 
+    console.log(data)
     const userId = data.userId
-    const url = 'api/users/{userId}/notes'
+    const url = 'api/users/'+userId+'/notes'
 
     const title = data.title
     const content = data.content
@@ -28,6 +30,12 @@ export const createNote = (data) => {
       })
       .then((response) => {
         console.log("New note has been successfully created")
+        console.log("Response: " +response)
+        for (var v in response) {
+          if (response.hasOwnProperty(v))
+          console.log(v + " -> " + response[v])
+        }
+        return 'created'
       })
       .catch((error) => {
         console.error("Error: "+error)
@@ -37,9 +45,10 @@ export const createNote = (data) => {
 
 export const updateNote = (data) => {
   return(dispatch) => { 
+    console.log(data)
     const userId = data.userId
     const id= data.id
-    const url = '/notes/{id}'
+    const url = '/notes/'+id
 
     const title = data.title
     const content = data.content
@@ -51,6 +60,8 @@ export const updateNote = (data) => {
       })
       .then((response) => {
         console.log("Note has been successfully updated")
+        console.log("Response: " +response)
+        return 'updated'
       })
       .catch((error) => {
         console.error("Error: "+error)
@@ -60,16 +71,19 @@ export const updateNote = (data) => {
 
 export const deleteNote = (data) => {
   return(dispatch) => { 
+    console.log(data)
     const userId = data.userId
     const id = data.id
-    const url = '/notes/{id}'
+    const url = '/notes/' + id
 
     return api
       .put(url, {
         userId,
       })
       .then((response) => {
-        console.log("Note has been successfully updated")
+        console.log("Note has been successfully deleted")
+        console.log("Response: " +response)
+        return 'deleted'
       })
       .catch((error) => {
         console.error("Error: "+error)

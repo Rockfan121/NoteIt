@@ -23,6 +23,8 @@ const NoteModal = React.createClass({
     this.setState({
       title: this.props.values.title,
       content: this.props.values.content,
+      userId: this.props.values.userId,
+      id: this.props.values.id,
     })
   },
 
@@ -30,6 +32,8 @@ const NoteModal = React.createClass({
     this.setState({
       title: newProps.values.title,
       content: newProps.values.content,
+      userId: newProps.values.userId,
+      id: newProps.values.id,
     })
   },
 
@@ -39,6 +43,11 @@ const NoteModal = React.createClass({
 
 
   render() {
+
+    const onSubmit =()=> {
+      this.props.onSubmit(this.state)
+    }
+
     const text = (this.props.isCreated 
         ? 'Edit note'
         : 'Add note')
@@ -59,7 +68,7 @@ const NoteModal = React.createClass({
           <Form 
             title={text}
             buttonLabel={buttonLabel}
-            onSubmit={this.props.onSubmit}
+            onSubmit={onSubmit}
             >
             <FormInput label='Title'
               type='title'
