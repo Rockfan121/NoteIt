@@ -77,7 +77,7 @@ export const deleteNote = (data) => {
     const url = '/notes/' + id
 
     return api
-      .put(url, {
+      .delete(url, {
         userId,
       })
       .then((response) => {
