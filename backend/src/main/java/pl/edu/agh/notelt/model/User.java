@@ -5,6 +5,7 @@ import org.assertj.core.util.Lists;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,17 +26,17 @@ public class User {
     @Column(length = 3333)
     private String token;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_note", joinColumns = {@JoinColumn(name = "user_id")})
     private List<Note> notes;
 
     public User() {
-        notes = Lists.emptyList();
+        notes = Lists.newArrayList();
     }
 
     public User(String name) {
         this.name = name;
-        notes = Lists.emptyList();
+        notes = Lists.newArrayList();
     }
 
     public String getToken() {

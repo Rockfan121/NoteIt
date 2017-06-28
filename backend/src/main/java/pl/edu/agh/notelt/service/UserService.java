@@ -2,6 +2,7 @@ package pl.edu.agh.notelt.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.edu.agh.notelt.model.Note;
 import pl.edu.agh.notelt.model.User;
 import pl.edu.agh.notelt.repository.UserRepository;
 
@@ -26,5 +27,13 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+
+    public void removeUser(String name) {
+        userRepository.removeUserByName(name);
+    }
+
+    public User getOwner(Note note) {
+        return userRepository.findUserByNotesContains(note);
     }
 }

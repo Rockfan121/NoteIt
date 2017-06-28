@@ -1,6 +1,5 @@
 package pl.edu.agh.notelt.service;
 
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.notelt.model.Note;
@@ -23,9 +22,7 @@ public class NoteService {
     }
 
     public List<Note> getNotes() {
-        final List<Note> res = Lists.newArrayList();
-        noteRepository.findAll().forEach(res::add);
-        return res;
+        return noteRepository.findAll();
     }
 
     public Optional<Note> getNote(int id) {
