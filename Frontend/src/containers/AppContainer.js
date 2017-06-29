@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { browserHistory, Router } from 'react-router'
 import { Provider } from 'react-redux'
 
-class AppContainer extends React.Component{
+class AppContainer extends React.Component {
 
   constructor(props) {
     super(props)
@@ -27,8 +27,8 @@ class AppContainer extends React.Component{
 }
 
 AppContainer.propTypes= {
-    routes : PropTypes.object.isRequired,
-    store  : PropTypes.object.isRequired,
-  }
+  routes : PropTypes.object.isRequired,
+  store  : PropTypes.object.isRequired,
+}
 
 export default AppContainer

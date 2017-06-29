@@ -11,7 +11,7 @@ import { icons } from 'assets/icons'
 import './NotesList.scss'
 
 
-class NotesList extends React.Component{
+class NotesList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -26,7 +26,7 @@ class NotesList extends React.Component{
   }
   
 
-  componentWillMount(){
+  componentWillMount() {
     this.setState({ 
       userId: this.props.userId, 
     })
@@ -206,11 +206,11 @@ class NotesList extends React.Component{
 
 NotesList.propTypes ={
   fetchN: PropTypes.func.isRequired,
-    createN: PropTypes.func.isRequired,
-    updateN: PropTypes.func.isRequired,
-    deleteN: PropTypes.func.isRequired,
-    notes: PropTypes.any.isRequired,
-    userId: PropTypes.number.isRequired,
+  createN: PropTypes.func.isRequired,
+  updateN: PropTypes.func.isRequired,
+  deleteN: PropTypes.func.isRequired,
+  notes: PropTypes.any.isRequired,
+  userId: PropTypes.number.isRequired,
 }
 
 

@@ -5,7 +5,7 @@ import Modal from 'react-modal'
 import './Modal.scss'
 import { Form, FormInput, FormTextarea } from 'components/Form'
 
-class NoteModal extends React.Component{
+class NoteModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -81,11 +81,11 @@ class NoteModal extends React.Component{
 }
 
 NoteModal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    isCreated: PropTypes.bool.isRequired,
-    onRequestClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    values: PropTypes.object.isRequired,
-  }
+  isOpen: PropTypes.bool.isRequired,
+  isCreated: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  values: PropTypes.object.isRequired,
+}
 
 export default NoteModal

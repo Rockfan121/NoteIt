@@ -5,7 +5,7 @@ import Header from '../../components/Header'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
-class CoreLayout extends React.Component{
+class CoreLayout extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -29,7 +29,7 @@ class CoreLayout extends React.Component{
 }
 
 CoreLayout.propTypes= {
-    children : PropTypes.element.isRequired,  
-  }
+  children : PropTypes.element.isRequired,  
+}
 
 export default CoreLayout

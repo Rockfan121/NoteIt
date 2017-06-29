@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Header.scss'
 
-class Header extends React.Component{
+class Header extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -38,9 +38,9 @@ class Header extends React.Component{
 }
 
 Header.propTypes = {
-    myTitle: PropTypes.string.isRequired,
-    buttons: PropTypes.array,
-  }
+  myTitle: PropTypes.string.isRequired,
+  buttons: PropTypes.array,
+}
 
 
 export default Header

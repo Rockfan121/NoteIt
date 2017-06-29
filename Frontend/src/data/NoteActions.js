@@ -11,6 +11,7 @@ export const fetchNotes = (id) => {
           type: actionType.NOTES_GET,
           notes,
         })
+        return 'fetched'
       })
   }
 }
