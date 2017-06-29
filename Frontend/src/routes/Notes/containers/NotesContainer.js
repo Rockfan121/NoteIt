@@ -22,16 +22,21 @@ class notesContainer extends React.Component {
   }
       
   componentWillReceiveProps(newProps) {
-    if (this._isMounted == true){
+    console.log("isFetching = " + this.state.isFetching)
+    if (this._isMounted == true) {
       if (!this.state.isFetching && (newProps.userId !== this.state.userId) || (newProps.token !== this.state.token)) {
         console.log("will fetch")
         this.setState({ //
           userId: newProps.userId,
           token: newProps.token,
-          isFetching: true,
         })  
         axios.defaults.headers.common['Authorization'] =  newProps.token // bug: token is undefined (should be saved in homeview response)
-        this.props.fetchN()
+        if (newProps.userId !== 0 && newProps.token !== "" && newProps.token !== null) {
+          this.setState({
+            isFetching: true,
+          })
+          this.props.fetchN()
+        }
       }
       else {
         console.log("won't fetch")
@@ -43,33 +48,35 @@ class notesContainer extends React.Component {
         })
       }
     }
-    //sprawdzam, czy nowe id i toekn roznia sie od poprzedniego
-    //jesli tak, ustawiam isFteching na true i robie this.props.fetchN
-    //jesli nie, wszystko update'uje (ale nie wywoluje juz fetchN!!!!
-    
-    console.log("notes = " + newProps.notes)
-    console.log("userId = " + newProps.userId)
-    console.log("token = " + newProps.token)
   }
 
-  componentDidMount(){
+  componentDidMount() {
+    //console.log("NotesContainer componentDidMount")
     this._isMounted = true
-    if (this.state.notes == [] && this.state.token !=="" && this.state.userId !== 0){
-      this.props.fetchN()
+
+    if (!this.state.isFetching && (this.props.userId !== this.state.userId) || (this.props.token !== this.state.token)) {
+      console.log("will fetch")
+      this.setState({ //
+        userId: this.props.userId,
+        token: this.props.token,
+      })  
+      axios.defaults.headers.common['Authorization'] =  this.props.token // bug: token is undefined (should be saved in homeview response)
+      if (this.props.userId !== 0 && this.props.token !== "" && this.props.token !== null) {
+        this.setState({
+          isFetching: true,
+        })
+        this.props.fetchN()
+      }
     }
   }
   componentWillMount() {
+    //console.log("NotesContainer componentWillMount")
     this._isMounted = false
     this.props.getToken()
-     // .then((response) => {
     this.props.getUserId()
-    //axios.defaults.headers.common['Authorization'] =  this.props.token // bug: token is undefined (should be saved in homeview response)
-      //    .then((response) =>{
-    //this.props.fetchN() 
-     //     })
-     // })
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
+    //console.log("NotesContainer componentWillUnmount")
     this._isMounted = false
   }
 
@@ -115,7 +122,7 @@ const NotesContainer = connect(
     const A = state.notes
     const B = state.auth
     // set token value (needed in page content refreshing)
-//    axios.defaults.headers.common['Authorization'] =  B.get('token') // bug: token is undefined (should be saved in homeview response)
+    //axios.defaults.headers.common['Authorization'] =  B.get('token') // bug: token is undefined (should be saved in homeview response)
     id=B.get('userId')
     return {
       notes: A.get('notes'),

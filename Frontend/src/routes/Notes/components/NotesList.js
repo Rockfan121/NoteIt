@@ -14,6 +14,7 @@ import './NotesList.scss'
 class NotesList extends React.Component {
   constructor(props) {
     super(props)
+    this._isMounted = false
     this.state = {
       isEditOpen: false,
       isDeleteOpen: false,
@@ -27,17 +28,30 @@ class NotesList extends React.Component {
   
 
   componentWillMount() {
-    this.setState({ 
+    this._isMounted = false
+    //console.log("NotesList componentWillMount")
+    /*this.setState({ 
       userId: this.props.userId, 
-    })
-    console.log('Authorization: ' +axios.defaults.headers.common['Authorization'])
+    })*/
+   // console.log('Authorization: ' +axios.defaults.headers.common['Authorization'])
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({ 
-      userId: newProps.userId, 
-    })
-    console.log('Authorization: ' +axios.defaults.headers.common['Authorization'])
+    //console.log("NotesList componentWillReceiveProps")
+    if (this._isMounted == true) {
+      this.setState({ 
+        userId: newProps.userId, 
+      })
+    }
+    //console.log('Authorization: ' +axios.defaults.headers.common['Authorization'])
+  }
+
+  componentDidMount() {
+    this._isMounted = true
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false
   }
 
   createAndFetch = (state) => {
