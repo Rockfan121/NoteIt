@@ -3,7 +3,6 @@ import org.springframework.http.ResponseEntity
 import pl.edu.agh.notelt.repository.NoteRepository
 import pl.edu.agh.notelt.repository.UserRepository
 import pl.edu.agh.notelt.rest.NoteRest
-import pl.edu.agh.notelt.rest.UserRest
 import pl.edu.agh.notelt.service.NoteService
 import pl.edu.agh.notelt.service.UserService
 import spock.lang.Specification
