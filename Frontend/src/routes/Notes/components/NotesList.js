@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 
 import Modal from 'react-modal'
-import Icon from 'components/Icon'
-import DeleteModal from 'components/Modal/DeleteModal'
-import NoteModal from 'components/Modal/NoteModal'
-import { icons } from 'assets/icons'
+import Icon from '../../../components/Icon'
+import DeleteModal from '../../../components/Modal/DeleteModal'
+import NoteModal from '../../../components/Modal/NoteModal'
+import { icons } from '../../../assets/icons'
 import './NotesList.scss'
 
 

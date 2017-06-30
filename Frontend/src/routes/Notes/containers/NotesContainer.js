@@ -1,10 +1,9 @@
 import React from "react"
-import { fetchNotes } from 'data/NoteActions'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import { createNote, updateNote, deleteNote } from 'data/NoteActions'
-import { getToken, getUserId } from 'data/AuthActions'
+import { fetchNotes, createNote, updateNote, deleteNote } from '../../../data/NoteActions'
+import { getToken, getUserId } from '../../../data/AuthActions'
 
 import NotesList from '../components/NotesList'
 import UserInfo from '../components/UserInfo'

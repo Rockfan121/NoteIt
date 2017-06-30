@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 
 import './Modal.scss'
-import { FormButton } from 'components/Form'
+import { FormButton } from '../Form'
 
 class DeleteModal extends React.Component {
   constructor(props) {

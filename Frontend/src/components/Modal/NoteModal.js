@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 
 import './Modal.scss'
-import { Form, FormInput, FormTextarea } from 'components/Form'
+import { Form, FormInput, FormTextarea } from '../Form'
 
 class NoteModal extends React.Component {
   constructor(props) {

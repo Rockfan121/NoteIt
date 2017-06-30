@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 
 import './HomeView.scss'
-import { responseGoogle, responseGoogle2 } from 'data/AuthActions'
+import { responseGoogle, responseGoogle2 } from '../../../data/AuthActions'
 
 // eslint-disable-next-line react/prefer-es6-class
 class homeView extends React.Component {
