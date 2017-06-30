@@ -1,9 +1,6 @@
 import React from "react"
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import axios from 'axios'
 
-import Modal from 'react-modal'
 import Icon from '../../../components/Icon'
 import DeleteModal from '../../../components/Modal/DeleteModal'
 import NoteModal from '../../../components/Modal/NoteModal'
@@ -38,7 +35,7 @@ class NotesList extends React.Component {
 
   componentWillReceiveProps(newProps) {
     //console.log("NotesList componentWillReceiveProps")
-    if (this._isMounted == true) {
+    if (this._isMounted === true) {
       this.setState({ 
         userId: newProps.userId, 
       })

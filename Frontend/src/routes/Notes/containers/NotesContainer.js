@@ -22,14 +22,14 @@ class notesContainer extends React.Component {
       
   componentWillReceiveProps(newProps) {
     console.log("isFetching = " + this.state.isFetching)
-    if (this._isMounted == true) {
+    if (this._isMounted === true) {
       if (!this.state.isFetching && (newProps.userId !== this.state.userId) || (newProps.token !== this.state.token)) {
         console.log("will fetch")
         this.setState({ //
           userId: newProps.userId,
           token: newProps.token,
         })  
-        axios.defaults.headers.common['Authorization'] =  newProps.token // bug: token is undefined (should be saved in homeview response)
+        axios.defaults.headers.common['Authorization'] = newProps.token // bug: token is undefined (should be saved in homeview response)
         if (newProps.userId !== 0 && newProps.token !== "" && newProps.token !== null) {
           this.setState({
             isFetching: true,
@@ -59,7 +59,7 @@ class notesContainer extends React.Component {
         userId: this.props.userId,
         token: this.props.token,
       })  
-      axios.defaults.headers.common['Authorization'] =  this.props.token // bug: token is undefined (should be saved in homeview response)
+      axios.defaults.headers.common['Authorization'] = this.props.token // bug: token is undefined (should be saved in homeview response)
       if (this.props.userId !== 0 && this.props.token !== "" && this.props.token !== null) {
         this.setState({
           isFetching: true,
@@ -88,7 +88,8 @@ class notesContainer extends React.Component {
     }
 
     return (
-      <div style={{ height: '100%', width: '100%' }}>
+      <div style={{ height: '100%',
+        width: '100%' }}>
         <UserInfo userData={userData} />
         <NotesList notes={this.state.notes} 
           userId={this.state.userId}

@@ -12,7 +12,7 @@ class NoteModal extends React.Component {
     }
   }
 
-  componentWillMount(newProps) {
+  componentWillMount() {
     this.setState({
       title: this.props.values.title,
       content: this.props.values.content,
@@ -30,7 +30,7 @@ class NoteModal extends React.Component {
     })
   }
 
-  onFormUpdate = (value, type)  => {
+  onFormUpdate = (value, type) => {
     this.setState({ [type]: value })
   }
 

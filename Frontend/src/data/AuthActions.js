@@ -5,13 +5,13 @@ import api from 'api'
 export const responseGoogle = (response) => {
   return (dispatch) => {
     const token = response.tokenObj.id_token
-    axios.defaults.headers.common['Authorization'] =  token
+    axios.defaults.headers.common['Authorization'] = token
     dispatch({
       type: actionType.SAVE_TOKEN,
       token,
     })
     localStorage.setItem('token', JSON.stringify(token))
-    console.log("State(token): " + JSON.parse(localStorage.getItem('token')))
+    //console.log("State(token): " + JSON.parse(localStorage.getItem('token')))
 
     api.get('/api/users/token')
           .then(function (response) {
@@ -22,7 +22,7 @@ export const responseGoogle = (response) => {
             })
 
             localStorage.setItem('userId', JSON.stringify(userId))
-            console.log("State(userId): " + JSON.parse(localStorage.getItem('userId')))
+            //console.log("State(userId): " + JSON.parse(localStorage.getItem('userId')))
           })
           .catch(function (error) {
             console.log("an error occurred")
@@ -44,7 +44,7 @@ export const getAuthData = () => {
         type: actionType.SAVE_TOKEN,
         token,
       })
-      axios.defaults.headers.common['Authorization'] =  token
+      axios.defaults.headers.common['Authorization'] = token
       const storedUserId = localStorage.getItem('userId')
       if(storedUserId) {
         const userId = JSON.parse(storedUserId)
@@ -64,7 +64,7 @@ export const getToken = () => {
     if (storedToken) {
       const token = JSON.parse(storedToken)
       console.log("localStorage.token: " + token)
-      axios.defaults.headers.common['Authorization'] =  token
+      axios.defaults.headers.common['Authorization'] = token
       dispatch({
         type: actionType.SAVE_TOKEN,
         token,

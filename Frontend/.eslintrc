@@ -29,7 +29,7 @@
     "comma-dangle": [2, "always-multiline"],
     "semi": [2, "never"],
     "no-undef": [2],
-    "no-unused-vars": [0],
+    "no-unused-vars": [1],
     "indent": [2, 2],
     "space-before-blocks": [2, "always"],
     "jsx-quotes": [2, "prefer-single"],
@@ -38,5 +38,21 @@
     "react/jsx-indent": [2, 2],
     "react/jsx-indent-props": [2, 2],
     "object-shorthand": [2, "always"],
+
+    "no-multi-spaces": [2],
+    "no-unmodified-loop-condition": [2],
+    "no-unused-expressions": [2],
+    "no-catch-shadow": [2],
+    "no-shadow": [1],
+    "no-use-before-define": [2, { "functions": true, "variables": true }],
+    "comma-spacing": [2, { "before": false, "after": true }],
+    "newline-per-chained-call": [2],
+    "no-lonely-if": [2],
+    "no-unneeded-ternary": [2],
+    "object-property-newline": [2],
+    "eqeqeq": [1],
+    "no-else-return": [2],
+    "dot-location": [2, "property"],
+
   }
 }

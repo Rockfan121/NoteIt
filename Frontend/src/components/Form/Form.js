@@ -9,9 +9,9 @@ class Form extends React.Component {
     super(props)
   }
   
-  render()  {
+  render() {
     const { buttonLabel, onSubmit, title } = this.props
-    const inputs = this.props.children.map((elem,i) =>
+    const inputs = this.props.children.map((elem, i) =>
       <div key={i}>
         {elem}
       </div>
